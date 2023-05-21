@@ -1,0 +1,40 @@
+
+
+<div> Blogs</div>
+
+<% @blogs.each do |blog| %>
+    <p>Author: <%blog.author_name%></p>
+    <p>Title: <%blog.title%></p>
+    <p>Content: <%blog.content%></p>
+<% end %>
+
+<button onclick="createPost()">Create Blog</button>
+
+<script>
+  function  createPost() {
+
+const data = {
+  author_name: "John Doe",
+  title: "Ror",
+  content:"ndjdhdhdhd dhd hdd "
+};
+
+const queryString = Object.keys(data)
+  .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+  .join("&");
+
+fetch('/create_blog?'+queryString)
+  .then(response => response.json())
+  .then(result => {
+    console.log("Response:", result);
+    alert("Created");
+    // Handle the response data here
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    // Handle any errors that occur during the request
+  });
+
+  }
+</script>
+
